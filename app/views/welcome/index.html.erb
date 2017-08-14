@@ -1,0 +1,34 @@
+<div class="welcome-index">
+	<div class="container">
+
+		<div class="col-sm-12">
+			<div class="heading">
+				<h1>test</h1>
+			</div>
+		</div>
+
+		<div class="testing">
+			<% @currencies.each do |c| %>
+				<div class="col-sm-3">
+					<ul>
+						<li class="crypto-amount"><%= number_with_precision(c.amount, precision: 5) %></li>
+						<li class="crypto-name"><%= find_coin(c)['name'] %></li>
+						<li class="crypto-price"><%= find_coin(c)['price_usd'] %></li>
+						<li class="crypto-market"><%= find_coin(c)['market_cap_usd'] %></li>
+						<%= link_to "Edit", edit_currency_path(c) %>
+						<%= link_to 'Delete', currency_path(c), method: :delete %>
+					</ul>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="col-sm-12">
+			<ul>
+				<li><%= number_to_currency(total_usd) %></li>
+				<li><%= number_to_currency(total_eth, precision: 5, unit: 'ETH ') %></li>
+				<li><%= number_to_currency(total_btc, precision: 5, unit: 'BTC ') %></li>
+			</ul>
+		</div>
+
+	</div>
+</div>

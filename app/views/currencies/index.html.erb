@@ -1,0 +1,19 @@
+<div class="currencies-index">
+	<div class="container">
+
+		<div class="col-sm-12">
+			<h1>Currencies Index</h1>
+			<% @currencies.each do |c| %>
+				<li>
+					<%= c.name %>
+					<%= c.symbol %>
+					<%= c.amount %>
+					<%= link_to "Edit", edit_currency_path(c) %>
+					<%= link_to 'Delete', currency_path(c), method: :delete %>
+				</li>
+			<% end %>
+			<%= link_to "New currency", new_currency_path %>
+		</div>
+
+	</div>
+</div>
