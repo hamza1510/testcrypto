@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-	before_action :fetch_api
+	before_action :testing
 
 	def index
 		@currencies = Currency.all
