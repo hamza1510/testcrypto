@@ -1,33 +1,61 @@
 <div class="welcome-index">
 	<div class="container">
 
-		<div class="col-sm-12">
-			<div class="heading">
-				<h1>test</h1>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="heading">
+					<h1>Welcome to Cryptote</h1>
+					<% if @currencies.any? %>
+						<p>
+							You are currently holding
+							<% @currencies.each do |c| %>
+								<% if c == @currencies.last %>
+								 and <%= c.name %>
+								<% else %>
+									<%= c.name.split.join %>
+								<% end %>
+							<% end %>
+						</p>
+					<% else %>
+						<p>No holdings currently listed, add one <%= link_to "here", new_currency_path %></p>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<h1><%= number_to_currency(total_usd) %></h1>
+				<p>Total value in USD</p>
 			</div>
 		</div>
 
-		<div class="testing">
-			<% @currencies.each do |c| %>
-				<div class="col-sm-3">
-					<ul>
-						<li class="crypto-amount"><%= number_with_precision(c.amount, precision: 5) %></li>
-						<li class="crypto-name"><%= find_coin(c)['name'] %></li>
-						<li class="crypto-price"><%= find_coin(c)['price_usd'] %></li>
-						<li class="crypto-market"><%= find_coin(c)['market_cap_usd'] %></li>
-						<%= link_to "Edit", edit_currency_path(c) %>
-						<%= link_to 'Delete', currency_path(c), method: :delete %>
+		<div class="row">
+			<div class="crypto-wrapper col-md-8 clearfix">
+				<% @currencies.each do |c| %>
+					<ul class="crypto-info">
+						<li class="crypto-name"><h4><%= find_coin(c)['name'] %></h4></li>
+						<li class="crypto-price"><%= number_to_currency(find_coin(c)['price_usd']) %></li>
+						<li class="crypto-market">$<%= number_with_delimiter(find_coin(c)['market_cap_usd']) %></li>
+					</ul>
+				<% end %>
+			</div>
+
+			<div class="holdings-wrapper">
+				<div class="col-md-4">
+					<ul class="holdings-info">
+						<h4>Holdings</h4>
+						<% @currencies.each do |c| %>
+							<li>
+								<%= find_coin(c)['symbol'] %>
+								<%= number_with_precision(c.amount, precision: 2) %>
+								<div class="edit-delete">
+									<%= link_to "Edit", edit_currency_path(c) %>
+									<%= link_to 'Delete', currency_path(c), method: :delete %>
+								</div>
+							</li>
+						<% end %>
 					</ul>
 				</div>
-			<% end %>
-		</div>
-
-		<div class="col-sm-12">
-			<ul>
-				<li><%= number_to_currency(total_usd) %></li>
-				<li><%= number_to_currency(total_eth, precision: 5, unit: 'ETH ') %></li>
-				<li><%= number_to_currency(total_btc, precision: 5, unit: 'BTC ') %></li>
-			</ul>
+			</div>
 		</div>
 
 	</div>

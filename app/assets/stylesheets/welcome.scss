@@ -2,13 +2,58 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+html body {
+	background-color: #ecf0f1;
+}
+
 .welcome-index {
-	.testing {
-		ul {
+	.heading {
+		margin-bottom: 35px;
+	}
+	.crypto-wrapper {
+		ul.crypto-info {
 			list-style: none;
-			background-color: #ecf0f1;
 			padding: 20px;
 			border-radius: 5px;
+			position: relative;
+			text-align: center;
+			background-color: #fff;
+			box-shadow: 0px 2px 1px lighten(#000, 90%);
+			width: 48%;
+			display: inline-block;
+			float: left;
+			&:nth-child(2n) {
+				float: right;
+			}
+			li.crypto-name h4 {
+
+			}
+			li.crypto-price {
+				font-size: 24px;
+			}
+			li.crypto-market {
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+		}
+	}
+	.holdings-wrapper {
+		ul.holdings-info {
+			list-style: none;
+			padding: 20px;
+			border-radius: 5px;
+			position: relative;
+			background-color: #fff;
+			box-shadow: 0px 2px 1px lighten(#000, 90%);
+			li {
+				padding: 20px 0px;
+				.edit-delete {
+					float: right;
+				}
+			}
+			li:not(:last-child) {
+				border-bottom: 1px solid #ecf0f1;
+			}
 		}
 	}
 }
