@@ -25,6 +25,7 @@
 			<div class="col-md-4">
 				<h1><%= number_to_currency(total_usd) %></h1>
 				<p>Total value in USD</p>
+				<h4><%= number_to_currency(total_eth, unit: 'ETH ') %> <%= number_to_currency(total_btc, unit: 'BTC ') %></h4>
 			</div>
 		</div>
 
@@ -34,7 +35,7 @@
 					<ul class="crypto-info">
 						<li class="crypto-name"><h4><%= find_coin(c)['name'] %></h4></li>
 						<li class="crypto-price"><%= number_to_currency(find_coin(c)['price_usd']) %></li>
-						<li class="crypto-market">$<%= number_with_delimiter(find_coin(c)['market_cap_usd']) %></li>
+						<li class="crypto-market"><%= number_to_currency(find_coin(c)['market_cap_usd'], precision: 0) %></li>
 					</ul>
 				<% end %>
 			</div>
